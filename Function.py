@@ -43,3 +43,35 @@ def summa():
         elif v["tyyp"] == "kulu":
             kokku -= amount
     output_text.insert(END, f"Kogusumma: {kokku}\n")
+
+def csv_faili_avamine():
+    failinimi = filedialog.askopenfilename(
+        title="Vali CSV fail",
+        filetypes=[("CSV failid", "*.csv"), ("Kõik failid", "*.*")]
+    )
+    
+    if not failinimi:
+        return
+    with open(failinimi, "r") as file:
+        reader = csv.DictReader(file)
+        output_text.delete("1.0", END)
+        for i, row in enumerate(reader, start=1):
+            output_text.insert(END, f"list {i}\n")
+            output_text.insert(END, f"  summa: {row['summa']}\n")
+            output_text.insert(END, f"  Kategooria: {row['kategooria']}\n")
+            output_text.insert(END, f"  Kirjeldus: {row['kirjeldus']}\n")
+            output_text.insert(END, f"  Tüüp: {row['tyyp']}\n\n")
+
+def csv_faili_salvestamine():
+        failinimi = filedialog.asksaveasfilename(
+        title="Salvesta CSV fail",
+        defaultextension=".csv",
+        filetypes=[("CSV failid", "*.csv"), ("Kõik failid", "*.*")]
+    )
+
+        fieldnames = ["summa", "kategooria", "kirjeldus", "tyyp"]
+        with open(failinimi, "w", newline="", encoding="utf-8") as file:
+            writer = csv.DictWriter(file, fieldnames=fieldnames)
+            writer.writeheader()
+            for entry in andmed.values():
+                writer.writerow(entry)
