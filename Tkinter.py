@@ -36,6 +36,7 @@ kirjeldus_entry = Entry(windows, font=("Calibri", 10, "bold"))
 add_new_button = Button(windows, text="add new", command = add_new)
 show_all_button = Button(windows, text="show all", command = show_all)
 add_summa_button = Button(windows, text="add summa", command = summa)
+open_button = Button(windows, text="open", command = csv_faili_avamine)
 
 
 #positsioon
@@ -51,6 +52,7 @@ kirjeldus_entry.grid(row=2, column=1)
 add_new_button.grid(row=1, column=5)
 show_all_button.grid(row=2, column=5)
 add_summa_button.grid(row=3, column=5)
+open_button.grid(row=1, column=8)
 
 windows.mainloop()
 
