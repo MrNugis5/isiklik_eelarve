@@ -26,12 +26,22 @@ def add_new():
     
 def show_all():
     output_text.delete("1.0", END)
+
+    kogu_tekst = ""
     for k, v in andmed.items():
-        output_text.insert(END, f"list {k}\n")
-        output_text.insert(END, f"  summa: {v['summa']}\n")
-        output_text.insert(END, f"  Kategooria: {v['kategooria']}\n")
-        output_text.insert(END, f"  Kirjeldus: {v['kirjeldus']}\n")
-        output_text.insert(END, f"  Tüüp: {v['tyyp']}\n\n")
+        kogu_tekst += f"list {k}\n"
+        kogu_tekst += f"  summa: {v['summa']}\n"
+        kogu_tekst += f"  Kategooria: {v['kategooria']}\n"
+        kogu_tekst += f"  Kirjeldus: {v['kirjeldus']}\n"
+        kogu_tekst += f"  Tüüp: {v['tyyp']}\n\n"
+
+    def trukita_taht_haaval(index=0):
+        if index < len(kogu_tekst):
+            output_text.insert(END, kogu_tekst[index])
+            windows.after(10, trukita_taht_haaval, index + 1)
+
+    trukita_taht_haaval()
+
 
 def summa():
     kokku = 0
