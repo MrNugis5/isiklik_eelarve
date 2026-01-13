@@ -3,6 +3,39 @@ windows = Tk()
 windows.geometry("600x600")
 windows.title("lihtsalt on")
 
+andmed = {}
+order = 1
+
+def add_new():
+    global order
+    
+    andmed[order] ={
+        "kulu/tulu": summa_entry.get(),
+        "kategooria": kategooria_entry.get(),
+        "kirjeldus": kirjeldus_entry.get(),
+        "tyyp": tyyp_entry.get()
+    }
+    
+    order += 1
+    
+    summa_entry.delete(0, END)
+    kategooria_entry.delete(0, END)
+    kirjeldus_entry.delete(0, END)
+    tyyp_entry.delete(0, END)
+    
+def show_all():
+    output_text.delete("1.0", END)
+    for k, v in andmed.items():
+        output_text.insert(END, f"list {k}\n")
+        output_text.insert(END, f"  Summa: {v['kulu/tulu']}\n")
+        output_text.insert(END, f"  Kategooria: {v['kategooria']}\n")
+        output_text.insert(END, f"  Kirjeldus: {v['kirjeldus']}\n")
+        output_text.insert(END, f"  Tüüp: {v['tyyp']}\n\n")
+    
+   
+output_text = Text(windows, width=50, height=15)
+output_text.grid(row=5, column=0, columnspan=6, pady=10)
+   
 #tekst
 summa_label = Label(windows, text = "kulu/tulu", font=("Calibri", 10, "bold"))
 kategooria_label = Label(windows, text = "Kategooria", font=("Calibri", 10, "bold"))
@@ -16,8 +49,8 @@ kirjeldus_entry = Entry(windows, font=("Calibri", 10, "bold"))
 tyyp_entry = Entry(windows, font=("Calibri", 10, "bold"))
 
 #buttons
-add_new_button = Button(windows, text="add new")
-show_all_button = Button(windows, text="show all")
+add_new_button = Button(windows, text="add new", command = add_new)
+show_all_button = Button(windows, text="show all", command = show_all)
 add_summa_button = Button(windows, text="add summa")
 
 
