@@ -22,3 +22,14 @@ def show_all():
         output_text.insert(END, f"  Kategooria: {v['kategooria']}\n")
         output_text.insert(END, f"  Kirjeldus: {v['kirjeldus']}\n")
         output_text.insert(END, f"  Tüüp: {v['tyyp']}\n\n")
+
+def summa():
+    kokku = 0
+    for v in andmed.values():
+        amount = int(v["summa"])
+        
+        if v["tyyp"] == "tulu":
+            kokku += amount
+        elif v["tyyp"] == "kulu":
+            kokku -= amount
+    output_text.insert(END, f"Kogusumma: {kokku}\n")
