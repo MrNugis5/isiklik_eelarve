@@ -34,7 +34,7 @@ kirjeldus_entry = Entry(windows, font=("Calibri", 10, "bold"))
 #buttons
 add_new_button = Button(windows, text="add new", command = add_new)
 show_all_button = Button(windows, text="show all", command = show_all)
-add_summa_button = Button(windows, text="add summa")
+add_summa_button = Button(windows, text="add summa", command = summa)
 
 
 #positsioon
