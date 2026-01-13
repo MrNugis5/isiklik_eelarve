@@ -10,10 +10,10 @@ def add_new():
     global order
     
     andmed[order] ={
-        "kulu/tulu": summa_entry.get(),
+        "summa": int(summa_entry.get()),
         "kategooria": kategooria_entry.get(),
         "kirjeldus": kirjeldus_entry.get(),
-        "tyyp": tyyp_entry.get()
+        "tyyp": kulu_tulu_var.get()
     }
     
     order += 1
@@ -21,23 +21,32 @@ def add_new():
     summa_entry.delete(0, END)
     kategooria_entry.delete(0, END)
     kirjeldus_entry.delete(0, END)
-    tyyp_entry.delete(0, END)
     
 def show_all():
     output_text.delete("1.0", END)
     for k, v in andmed.items():
         output_text.insert(END, f"list {k}\n")
-        output_text.insert(END, f"  Summa: {v['kulu/tulu']}\n")
+        output_text.insert(END, f"  summa: {v['summa']}\n")
         output_text.insert(END, f"  Kategooria: {v['kategooria']}\n")
         output_text.insert(END, f"  Kirjeldus: {v['kirjeldus']}\n")
         output_text.insert(END, f"  Tüüp: {v['tyyp']}\n\n")
-    
-   
+        
 output_text = Text(windows, width=50, height=15)
 output_text.grid(row=5, column=0, columnspan=6, pady=10)
-   
+
+kulu_tulu_var = StringVar(value="kulu")
+
+kulu_tulu_menu = OptionMenu(
+    windows,
+    kulu_tulu_var,
+    "kulu",
+    "tulu"
+)
+kulu_tulu_menu.grid(row=3, column=1)
+
+
 #tekst
-summa_label = Label(windows, text = "kulu/tulu", font=("Calibri", 10, "bold"))
+summa_label = Label(windows, text = "Summa", font=("Calibri", 10, "bold"))
 kategooria_label = Label(windows, text = "Kategooria", font=("Calibri", 10, "bold"))
 kirjeldus_label = Label(windows, text = "Kirjeldus", font=("Calibri", 10, "bold"))
 tyyp_label = Label(windows, text="Tyyp", font=("Calibri", 10, "bold"))
@@ -46,7 +55,6 @@ tyyp_label = Label(windows, text="Tyyp", font=("Calibri", 10, "bold"))
 summa_entry = Entry(windows, font=("Calibri", 10, "bold"))
 kategooria_entry = Entry(windows, font=("Calibri", 10, "bold"))
 kirjeldus_entry = Entry(windows, font=("Calibri", 10, "bold"))
-tyyp_entry = Entry(windows, font=("Calibri", 10, "bold"))
 
 #buttons
 add_new_button = Button(windows, text="add new", command = add_new)
@@ -63,10 +71,10 @@ tyyp_label.grid(row=3, column=0)
 summa_entry.grid(row=0, column=1)
 kategooria_entry.grid(row=1, column=1)
 kirjeldus_entry.grid(row=2, column=1)
-tyyp_entry.grid(row=3, column=1)
 
 add_new_button.grid(row=1, column=5)
 show_all_button.grid(row=2, column=5)
 add_summa_button.grid(row=3, column=5)
 
 windows.mainloop()
+
