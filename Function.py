@@ -1,5 +1,15 @@
 def add_new():
     global order
+
+    try:
+        summa = int(summa_entry.get())
+        if summa <= 0:
+            raise ValueError
+    except ValueError:
+        messagebox.showerror(
+            "Viga",
+            "Summa peab olema positiivne täisarv!")
+        return
     
     andmed[order] ={
         "summa": int(summa_entry.get()),
